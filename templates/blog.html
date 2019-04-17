@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load posts_extras %}
+{% block content %}
+    <div class="container content_container" >
+      <div class="row">
+        <!-- Latest Posts -->
+        <main class="posts-listing col-lg-8">
+          <div class="container">
+              {% if span %}
+              <div class="h5">
+                  {{span}}<span style="color: orangered">{{title}}</span>
+              </div>
+              {% endif %}
+            <div class="row">
+              <!-- post -->
+              <!--<div class="card w-75">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Button</a>
+                </div>
+              </div>-->
+              {% for blog in blogs %}
+              <div class="post col-xl-6">
+                <div class="post-thumbnail"><a href="{{ blog.get_absolutly_url }}"><img src="{{blog.thumbnail.url}}" alt="..." class="thumbnail"></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    <div class="date meta-last">{{ blog.timestamp }}</div>
+                    <div class="category">
+                            <a href="{% url 'get_category_blogs' id=blog.category_id %}">{{ blog.category }}</a>
+                    </div>
+                  </div><a href="{{ blog.get_absolutly_url }}">
+                    <h3 class="h4">{{ blog.title }}</h3></a>
+                  <p class="text-muted">{{ blog.overview }}</p>
+                  <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                      <div class="avatar"><img src="{{blog.author.profile_picture.url}}" alt="..." class="img-fluid"></div>
+                      <div class="title"><span>{{blog.author}}</span></div></a>
+                    <div class="date"><i class="icon-clock"></i> {{ blog.timestamp|timesince }} ago</div>
+                    <div class="comments meta-last"><i class="icon-comment"></i>{{ blog.comments.count }}</div>
+                  </footer>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-template d-flex justify-content-center">
+                {% if blogs.has_previous %}
+                <li class="page-item"><a href="?page={{ blogs.previous_page_number }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                {% endif %}
+
+                {% for page in pagerange %}
+                    {% paginate current_page page pagenum %}
+                {% endfor %}
+
+                {% if blogs.has_next %}
+                <li class="page-item"><a href="?page={{ blogs.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                {% endif %}
+              </ul>
+            </nav>
+          </div>
+        </main>
+        {% include 'aside.html' with recent=recent category_count=category_count  %}
+      </div>
+    </div>
+    <!-- Page Footer-->
+{% endblock %}
