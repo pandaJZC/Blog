@@ -1,7 +1,8 @@
->基于Django2.1，Python3.6.5
+>基于Django2.1，Python3.6.5的个人博客
 
-感谢JustDjango和Bootstrapious
-
-网址：[www.pandacoder.top](www.pandacoder.top)
-
-**欢迎来踩**
+1.注册登录，验证过注册邮箱才可以登录
+2.多级评论功能
+3.支持修改已登录用户的名片
+4.多级分类，标签云
+5.以来访用户的ip作为标识，防止刷新文章阅读数就加一
+6.分页栏最多允许5页
