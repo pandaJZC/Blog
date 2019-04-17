@@ -28,14 +28,14 @@ strong {
   font-weight: 700;
 }
 
-a,
+/* a,
 i,
 span {
   display: inline-block;
   text-decoration: none;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-}
+} */
 
 a:hover, a:focus,
 i:hover,

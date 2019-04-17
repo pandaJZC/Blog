@@ -6,60 +6,46 @@
       <div class="row">
         <!-- Latest Posts -->
         <main class="posts-listing col-lg-8">
-          <div class="container">
-              {% if span %}
-              <div class="h5">
-                  {{span}}<span style="color: orangered">{{title}}</span>
-              </div>
-              {% endif %}
-            <div class="row">
-              <!-- post -->
-              <!--<div class="card w-75">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Button</a>
-                </div>
-              </div>-->
-              {% for blog in blogs %}
-              <div class="post col-xl-6">
-                <div class="post-thumbnail"><a href="{{ blog.get_absolutly_url }}"><img src="{{blog.thumbnail.url}}" alt="..." class="thumbnail"></a></div>
-                <div class="post-details">
-                  <div class="post-meta d-flex justify-content-between">
-                    <div class="date meta-last">{{ blog.timestamp }}</div>
-                    <div class="category">
-                            <a href="{% url 'get_category_blogs' id=blog.category_id %}">{{ blog.category }}</a>
+            <div class="wrap">
+
+                <div class="blog">
+                    {% for blog in blogs %}
+                    <div class="conteudo">
+                        <span>{{ blog.timestamp }}</span>
+                        <div class="post-info">
+                            Posted by {{blog.author}}
+                        </div>
+                        <a href="{{ blog.get_absolutly_url }}"><img src="{{blog.thumbnail.url}}" alt="..." class="thumbnail"></a>
+                        <h4>{{ blog.title }} </h4>
+                        <span><a href="{% url 'get_category_blogs' id=blog.category_id %}">{{ blog.category }}</a></span>
+                        <hr>
+                        <p>
+                            {{ blog.overview }}
+                        </p>
+                        <span><i class="icon-comment"></i>{{ blog.comments.count }}</span>
+                        <a href="#" class="continue-lendo">Read more →</a>
                     </div>
-                  </div><a href="{{ blog.get_absolutly_url }}">
-                    <h3 class="h4">{{ blog.title }}</h3></a>
-                  <p class="text-muted">{{ blog.overview }}</p>
-                  <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                      <div class="avatar"><img src="{{blog.author.profile_picture.url}}" alt="..." class="img-fluid"></div>
-                      <div class="title"><span>{{blog.author}}</span></div></a>
-                    <div class="date"><i class="icon-clock"></i> {{ blog.timestamp|timesince }} ago</div>
-                    <div class="comments meta-last"><i class="icon-comment"></i>{{ blog.comments.count }}</div>
-                  </footer>
+                    {% endfor %}
+                    <div class="conteudo">
+                        <div class="post-info">
+                            Posted by Michael
+                        </div>
+                        <img src="https://designculture.com.br/wp-content/uploads/2013/07/14.-flat-design.jpg">
+                        <h4> Lorem Ipsum Dolor </h4>
+                        <hr>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <a href="#" class="continue-lendo">Read more →</a>
+                    </div>
                 </div>
-              </div>
-              {% endfor %}
             </div>
-            <!-- Pagination -->
-            <nav aria-label="Page navigation example">
-              <ul class="pagination pagination-template d-flex justify-content-center">
-                {% if blogs.has_previous %}
-                <li class="page-item"><a href="?page={{ blogs.previous_page_number }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
-                {% endif %}
 
-                {% for page in pagerange %}
-                    {% paginate current_page page pagenum %}
-                {% endfor %}
-
-                {% if blogs.has_next %}
-                <li class="page-item"><a href="?page={{ blogs.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
-                {% endif %}
-              </ul>
-            </nav>
-          </div>
         </main>
         {% include 'aside.html' with recent=recent category_count=category_count  %}
       </div>

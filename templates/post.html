@@ -93,7 +93,7 @@
                             <form method="POST" class="commenting-form">
                                 {% csrf_token %}
                                 <div class="row ">
-                                    <textarea rows='1' placeholder='Auto-Expanding Textarea'></textarea>
+                                    <textarea rows='1' placeholder='Auto-Expanding Textarea' name="comment"></textarea>
                                     {% if user.is_authenticated %}
                                     <div class="form-group col-md-12">
                                         <button type="submit" class="btn btn-secondary">评论</button>
